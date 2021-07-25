@@ -14,7 +14,7 @@ class PostController extends Controller
             ->orderByDesc('publish_date')
             ->paginate(10);
 
-        return view('blog.index', [
+        return view('post.index', [
             'posts' => $posts
         ]);
     }
@@ -25,7 +25,7 @@ class PostController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
-        return view('blog.show', [
+        return view('post.show', [
             'post' => $post
         ]);
     }
