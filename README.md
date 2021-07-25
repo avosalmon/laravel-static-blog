@@ -1,62 +1,57 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+It is great to build your site as a static site like [JAMstack](https://jamstack.org/), however, you need to learn how to use static site generator such as Next.js or Gatsby in as well as headless CMS.
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+If you are familiar with Laravel, you can build your Laravel app as a static site and deploy to CDN like Netlify without a single line of JavaScript.
 
-## About Laravel
+This repository is a sample blog app powered by Laravel which is deployed as a static site [here](https://laravel-static-blog.netlify.app/).
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tech stack
+- Laravel 8
+- [Laravel Sail](https://laravel.com/docs/8.x/sail) for local Docker environemnt
+- [Wink](https://github.com/themsaid/wink) for admin panel
+- [Laravel Export](https://github.com/spatie/laravel-export)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Netlify CLI](https://docs.netlify.com/cli/get-started/)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Setup
+Copy env file.
+```sh
+cp .env.example .env
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Start docker containers.
+```sh
+$ sail up -d
+```
 
-## Learning Laravel
+Install dependencies.
+```sh
+$ sail composer install
+$ sail npm install
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Migrate database tables.
+```sh
+$ sail artisan migrate
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+By default, this app uses the `s3` disk. If you want to use the `public` disk, create a [symbolic link](https://laravel.com/docs/8.x/filesystem#the-public-disk) with the command below.
+```sh
+$ sail artisan storage:link
+```
 
-## Laravel Sponsors
+Build assets.
+```sh
+$ sail npm run dev
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Now you can access the app at http://localhost.
+Admin panel is powered by [Wink](https://github.com/writingink/wink) and accessible at http://localhost/wink.
 
-### Premium Partners
+## Deploy the entire site as a static site to Netlify
+You can export the entire site (excluding the admin panel) as a static site using [spatie/laravel-export](https://github.com/spatie/laravel-export) and deploy to Netlify. It's blazing fast and scalable 🚀.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
+```sh
+$ sail artisan export
+```
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This command will build production assets, export the entire site into the `dist` folder, and then deploy the `dist` folder to Netlify. See [config/export.php](https://github.com/avosalmon/laravel-static-blog/blob/main/config/export.php) for mroe details.
