@@ -56,7 +56,7 @@ return [
      * You can skip these by adding a `--skip-{name}` flag to the command.
      */
     'before' => [
-        'assets' => 'npm run prod',
+        'assets' => '/usr/bin/npm run prod',
     ],
 
     /*
@@ -66,7 +66,7 @@ return [
      * You can skip these by adding a `--skip-{name}` flag to the command.
      */
     'after' => [
-        // 'deploy' => '/usr/local/bin/netlify deploy --prod',
+        'deploy' => '/usr/bin/npm run deploy',
     ],
 
 ];
