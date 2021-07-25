@@ -13,6 +13,8 @@ services:
         environment:
             WWWUSER: '${WWWUSER}'
             LARAVEL_SAIL: 1
+            NETLIFY_SITE_ID: '${NETLIFY_SITE_ID}'
+            NETLIFY_AUTH_TOKEN: '${NETLIFY_AUTH_TOKEN}'
         volumes:
             - '.:/var/www/html'
         networks:

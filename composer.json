@@ -12,6 +12,7 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "league/flysystem-aws-s3-v3": "~1.0",
+        "spatie/laravel-export": "^0.3.9",
         "themsaid/wink": "^1.2"
     },
     "require-dev": {

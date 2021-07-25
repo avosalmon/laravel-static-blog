@@ -7,7 +7,8 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "deploy": "netlify deploy --prod"
     },
     "devDependencies": {
         "@tailwindcss/typography": "^0.4.1",
@@ -15,6 +16,7 @@
         "axios": "^0.21",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
+        "netlify-cli": "^5.2.3",
         "postcss": "^8.3.6",
         "tailwindcss": "^2.2.7"
     }
