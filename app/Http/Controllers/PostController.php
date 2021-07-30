@@ -7,15 +7,32 @@ use Wink\WinkPost;
 
 class PostController extends Controller
 {
-    public function index()
+    const PER_PAGE = 3;
+
+    public function index(int $page = 1)
     {
+        if ($page <= 0) {
+            $page = 1;
+        }
+
+        $offset = self::PER_PAGE * ($page - 1);
+
         $posts = WinkPost::with('tags')
             ->live()
             ->orderByDesc('publish_date')
-            ->paginate(10);
+            ->offset($offset)
+            ->limit(self::PER_PAGE)
+            ->get();
+
+        $total = WinkPost::with('tags')
+            ->live()
+            ->count();
 
         return view('post.index', [
-            'posts' => $posts
+            'posts' => $posts,
+            'currentPage' => $page,
+            'isFirstPage' => $page === 1,
+            'isLastPage' => $total - $offset < self::PER_PAGE
         ]);
     }
 

@@ -16,11 +16,11 @@
 
     <nav>
         <ul class="flex justify-between">
-            <li class="{{ $posts->onFirstPage() ? 'invisible' : 'visible' }}">
-                <a class="underline" href="{{ $posts->previousPageUrl() }}">« Previous</a>
+            <li class="{{ $isFirstPage ? 'invisible' : 'visible' }}">
+                <a class="underline" href="/page/{{ $currentPage - 1 }}">« Previous</a>
             </li>
-            <li class="{{ $posts->hasMorePages() ? 'visible' : 'invisible' }}">
-                <a class="underline" href="{{ $posts->nextPageUrl() }}">Next »</a>
+            <li class="{{ $isLastPage ? 'invisible' : 'visible' }}">
+                <a class="underline" href="/page/{{ $currentPage + 1 }}">Next »</a>
             </li>
         </ul>
     </nav>
