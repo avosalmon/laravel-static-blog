@@ -1,6 +1,6 @@
-It is great to build your site as a static site like [JAMstack](https://jamstack.org/), however, you need to learn how to use static site generator such as Next.js or Gatsby in as well as headless CMS.
+It is great to build your site as a static site like [JAMstack](https://jamstack.org/), however, you need to learn how to use static site generator such as Next.js or Gatsby.js as well as headless CMS.
 
-If you are familiar with Laravel, you can build your Laravel app as a static site and deploy to CDN like Netlify without a single line of JavaScript.
+If you are familiar with Laravel, you can build your Laravel app as a static site and deploy it to CDN like Netlify without writing a single line of JavaScript.
 
 This repository is a sample blog app powered by Laravel which is deployed as a static site [here](https://laravel-static-blog.netlify.app/).
 
