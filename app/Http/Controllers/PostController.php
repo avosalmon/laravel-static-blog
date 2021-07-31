@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Wink\WinkPost;
 
 class PostController extends Controller
 {
-    const PER_PAGE = 3;
+    const PER_PAGE = 10;
 
     public function index(int $page = 1)
     {
