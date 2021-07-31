@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Wink\WinkPost;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -16,14 +16,14 @@ class PostController extends Controller
 
         $offset = self::PER_PAGE * ($page - 1);
 
-        $posts = WinkPost::with('tags')
+        $posts = Post::with('tags')
             ->live()
             ->orderByDesc('publish_date')
             ->offset($offset)
             ->limit(self::PER_PAGE)
             ->get();
 
-        $total = WinkPost::with('tags')
+        $total = Post::with('tags')
             ->live()
             ->count();
 
@@ -37,7 +37,7 @@ class PostController extends Controller
 
     public function show(string $slug)
     {
-        $post = WinkPost::with('tags')
+        $post = Post::with('tags')
             ->where('slug', $slug)
             ->firstOrFail();
 
