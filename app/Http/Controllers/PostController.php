@@ -31,7 +31,7 @@ class PostController extends Controller
             'posts' => $posts,
             'currentPage' => $page,
             'isFirstPage' => $page === 1,
-            'isLastPage' => $total - $offset < self::PER_PAGE
+            'isLastPage' => ($total - $offset) <= self::PER_PAGE
         ]);
     }
 
