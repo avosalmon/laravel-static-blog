@@ -14,14 +14,15 @@
         </article>
     @endforeach
 
-    <nav>
-        <ul class="flex justify-between">
-            <li class="{{ $isFirstPage ? 'invisible' : 'visible' }}">
-                <a class="underline" href="/page/{{ $currentPage - 1 }}">« Previous</a>
-            </li>
-            <li class="{{ $isLastPage ? 'invisible' : 'visible' }}">
-                <a class="underline" href="/page/{{ $currentPage + 1 }}">Next »</a>
-            </li>
-        </ul>
+    <nav class="mt-24 mb-24">
+        <div class="flex justify-center">
+            @unless ($isFirstPage)
+            <a class="flex justify-center items-center w-48 h-12 bg-black text-white mr-14 hover:bg-gray-700" href="/page/{{ $currentPage - 1 }}">< Previous</a>
+            @endunless
+
+            @unless ($isLastPage)
+            <a class="flex justify-center items-center w-48 h-12 bg-black text-white hover:bg-gray-700" href="/page/{{ $currentPage + 1 }}">Next ></a>
+            @endunless
+        </div>
     </nav>
 @endsection
